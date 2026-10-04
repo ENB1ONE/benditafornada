@@ -13,9 +13,11 @@
                 extend: {
                     colors: {
                         brand: {
-                            bg: '#2A1610',
-                            text: '#FDF5E6',
-                            accent: '#C69C6D',
+                            bg: '#FDF8F2', // Creme muito suave e apetitoso
+                            card: '#FFFFFF',
+                            text: '#4A2511', // Marrom chocolate profundo
+                            accent: '#D99B58', // Caramelo dourado
+                            accentDark: '#8E3B20', // Marrom avermelhado
                             whatsapp: '#25D366',
                             whatsappHover: '#1DA851'
                         }
@@ -23,6 +25,11 @@
                     fontFamily: {
                         serif: ['"Playfair Display"', 'serif'],
                         sans: ['Inter', 'sans-serif'],
+                        script: ['"Dancing Script"', 'cursive'], // Fonte cursiva para detalhes
+                    },
+                    boxShadow: {
+                        'soft': '0 10px 40px -10px rgba(74, 37, 17, 0.1)',
+                        'glow': '0 0 20px rgba(37, 211, 102, 0.4)',
                     }
                 }
             }
@@ -32,37 +39,39 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
     
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         body {
-            background-color: #2A1610;
-            color: #FDF5E6;
+            background-color: #FDF8F2;
+            color: #4A2511;
         }
         
-        /* Subtle wood texture overlay using CSS patterns or gradients */
-        .wood-texture {
-            background-image: 
-                linear-gradient(rgba(42, 22, 16, 0.9), rgba(42, 22, 16, 0.95)),
-                url('https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=2070&auto=format&fit=crop');
-            background-size: cover;
-            background-attachment: fixed;
+        /* Pattern sutil para dar textura de padaria/papel manteiga */
+        .bakery-pattern {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d99b58' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
         }
 
-        .hero-bg {
-            background-image: 
-                linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)),
-                url('https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=2072&auto=format&fit=crop');
-            background-size: cover;
-            background-position: center;
+        /* Efeitos de Hover e Animações Dinâmicas */
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-
         .card-hover:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px -10px rgba(74, 37, 17, 0.15);
+        }
+
+        .img-zoom-container {
+            overflow: hidden;
+        }
+        .img-zoom-container img {
+            transition: transform 0.7s ease;
+        }
+        .card-hover:hover .img-zoom-container img {
+            transform: scale(1.08);
         }
 
         .whatsapp-pulse {
@@ -70,35 +79,43 @@
         }
 
         @keyframes pulse-green {
-            0% {
-                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
-            }
-            70% {
-                box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
-            }
-            100% {
-                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
-            }
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
         }
+
+        /* Entrada Suave dos Elementos (Fade In Up) */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0;
+        }
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
     </style>
 </head>
-<body class="font-sans antialiased wood-texture min-h-screen flex flex-col">
+<body class="font-sans antialiased bakery-pattern min-h-screen flex flex-col selection:bg-brand-accent selection:text-white">
 
     <!-- 1. Cabeçalho (Navbar) -->
-    <header class="sticky top-0 z-50 bg-brand-bg/95 backdrop-blur-sm border-b border-brand-accent/20 shadow-lg transition-all duration-300">
+    <header class="sticky top-0 z-50 bg-brand-bg/90 backdrop-blur-md border-b border-brand-accent/20 shadow-sm transition-all duration-300">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
+            <div class="flex justify-between items-center h-24">
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center">
-                    <a href="#" class="flex flex-col items-center justify-center border-2 border-brand-accent rounded-full w-16 h-16 p-1 bg-brand-bg">
-                        <span class="font-serif font-bold text-brand-accent text-xs tracking-wider leading-tight text-center">BENDITA<br>FORNADA</span>
+                    <a href="#" class="block transform hover:scale-105 transition-transform duration-300">
+                        <!-- Utilizando a logo original enviada pelo cliente -->
+                        <img src="assets/logo.png" alt="Logo Bendita Fornada" class="h-20 w-auto drop-shadow-sm">
                     </a>
                 </div>
                 <!-- CTA Button -->
                 <div class="flex items-center">
                     <a href="https://wa.me/5519989389191" target="_blank" rel="noopener noreferrer" 
-                       class="inline-flex items-center justify-center px-5 py-2.5 bg-brand-whatsapp hover:bg-brand-whatsappHover text-white font-medium rounded-full shadow-lg transition-colors duration-300 gap-2">
-                        <i class="fab fa-whatsapp text-lg"></i>
+                       class="inline-flex items-center justify-center px-4 py-2.5 md:px-6 md:py-3 bg-brand-whatsapp hover:bg-brand-whatsappHover text-white font-semibold rounded-full shadow-md hover:shadow-glow transition-all duration-300 gap-2 text-sm md:text-base transform hover:-translate-y-1">
+                        <i class="fab fa-whatsapp text-lg md:text-xl"></i>
                         <span class="hidden sm:inline">Fazer Encomenda</span>
                         <span class="sm:hidden">Pedir</span>
                     </a>
@@ -108,89 +125,132 @@
     </header>
 
     <main class="flex-grow">
-        <!-- 2. Hero Section -->
-        <section class="hero-bg relative py-32 sm:py-48 flex items-center justify-center min-h-[70vh]">
-            <div class="absolute inset-0 bg-gradient-to-t from-brand-bg to-transparent"></div>
-            
-            <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <span class="text-brand-accent font-serif italic text-lg sm:text-xl mb-4 block">Bem-vindo à</span>
-                <h1 class="text-4xl sm:text-6xl md:text-7xl font-bold font-serif text-white tracking-tight mb-6 drop-shadow-lg">
-                    Artesanal, Fresco, Delicioso.
-                </h1>
-                <p class="mt-4 text-xl sm:text-2xl text-gray-200 font-light max-w-2xl mx-auto mb-10 drop-shadow-md">
-                    Da nossa família para a sua mesa. Pães caseiros, batatas recheadas e assados feitos com afeto.
-                </p>
-                <div class="mt-8 flex justify-center">
-                    <a href="https://wa.me/5519989389191" target="_blank" rel="noopener noreferrer" 
-                       class="whatsapp-pulse inline-flex items-center px-8 py-4 bg-brand-whatsapp hover:bg-brand-whatsappHover text-white text-lg sm:text-xl font-bold rounded-full shadow-[0_4px_14px_0_rgba(37,211,102,0.39)] transition-transform hover:scale-105 duration-300 gap-3">
-                        <i class="fab fa-whatsapp text-2xl"></i>
-                        Faça sua encomenda! (19) 98938-9191
-                    </a>
+        <!-- 2. Hero Section (Split Layout para melhor foco na comida e mobile) -->
+        <section class="relative pt-12 pb-20 md:pt-24 md:pb-32 overflow-hidden">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="flex flex-col md:flex-row items-center gap-12 md:gap-8">
+                    
+                    <!-- Text Content -->
+                    <div class="md:w-1/2 text-center md:text-left animate-fade-in">
+                        <span class="font-script text-3xl md:text-4xl text-brand-accentDark mb-2 block transform -rotate-2">
+                            Feito com muito afeto
+                        </span>
+                        <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold font-serif text-brand-text leading-tight mb-6">
+                            Artesanal.<br>Fresco.<br>Delicioso.
+                        </h1>
+                        <p class="text-lg md:text-xl text-brand-text/80 font-light mb-8 max-w-lg mx-auto md:mx-0">
+                            Da nossa família para a sua mesa. Pães caseiros, batatas recheadas e assados irresistíveis, saindo do forno direto para você.
+                        </p>
+                        
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start items-center">
+                            <a href="https://wa.me/5519989389191" target="_blank" rel="noopener noreferrer" 
+                               class="whatsapp-pulse inline-flex items-center justify-center px-8 py-4 bg-brand-whatsapp hover:bg-brand-whatsappHover text-white text-lg font-bold rounded-full transition-transform hover:scale-105 duration-300 gap-3 w-full sm:w-auto">
+                                <i class="fab fa-whatsapp text-2xl"></i>
+                                Faça sua Encomenda!
+                            </a>
+                        </div>
+                        <p class="mt-4 text-sm font-medium text-brand-accentDark flex items-center justify-center md:justify-start gap-2">
+                            <i class="fas fa-motorcycle"></i> Entregamos quentinho na sua casa
+                        </p>
+                    </div>
+
+                    <!-- Image Content -->
+                    <div class="md:w-1/2 relative animate-fade-in delay-200">
+                        <!-- Imagem circular/arredondada super apetitosa -->
+                        <div class="relative rounded-t-[50%] rounded-b-3xl overflow-hidden shadow-2xl border-4 border-white aspect-[4/5] md:aspect-square">
+                            <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=2072&auto=format&fit=crop" 
+                                 alt="Pão artesanal rústico" 
+                                 class="w-full h-full object-cover">
+                            <!-- Badge/Selo Flutuante -->
+                            <div class="absolute -bottom-4 -right-4 md:bottom-8 md:-left-8 bg-brand-card rounded-full p-4 shadow-xl border-2 border-brand-accent flex items-center gap-3 transform rotate-3">
+                                <div class="bg-brand-accentDark text-white w-12 h-12 rounded-full flex items-center justify-center text-xl">
+                                    <i class="fas fa-fire"></i>
+                                </div>
+                                <div class="pr-2">
+                                    <p class="text-xs font-bold text-brand-text uppercase tracking-wide">Recém Saído</p>
+                                    <p class="font-script text-xl text-brand-accentDark leading-none">do forno!</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </section>
 
         <!-- 3. Menu / Os Mais Pedidos -->
-        <section class="py-20 sm:py-32 relative z-10" id="menu">
+        <section class="py-20 md:py-32 bg-white/50 backdrop-blur-sm border-y border-brand-accent/10" id="menu">
             <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-16">
-                    <h2 class="text-3xl sm:text-5xl font-serif font-bold text-brand-accent mb-4">Os Mais Pedidos</h2>
-                    <div class="h-1 w-24 bg-brand-accent mx-auto rounded-full mb-6"></div>
-                    <p class="text-lg text-brand-text/80 max-w-2xl mx-auto">Feitos com ingredientes selecionados e muito carinho para adoçar e salgar o seu dia.</p>
+                
+                <div class="text-center mb-16 animate-fade-in">
+                    <span class="font-script text-3xl text-brand-accent mb-2 block">Destaques do menu</span>
+                    <h2 class="text-4xl md:text-5xl font-serif font-bold text-brand-text mb-6">Os Mais Pedidos</h2>
+                    <div class="h-1 w-24 bg-brand-accent mx-auto rounded-full mb-6 opacity-60"></div>
+                    <p class="text-lg text-brand-text/70 max-w-2xl mx-auto">
+                        Receitas exclusivas, ingredientes selecionados e aquele gostinho de comida feita em casa.
+                    </p>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
                     
-                    <!-- Card 1 -->
-                    <div class="bg-black/40 backdrop-blur-sm border border-brand-accent/30 rounded-2xl overflow-hidden card-hover transition-all duration-300 flex flex-col">
-                        <div class="h-64 overflow-hidden relative">
-                            <img src="https://images.unsplash.com/photo-1589367920969-ab8e050eb0e9?q=80&w=2000&auto=format&fit=crop" alt="Pão Caseiro" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-                            <h3 class="absolute bottom-4 left-6 text-2xl font-serif font-bold text-white">Pão Caseiro</h3>
+                    <!-- Card 1: Pão Caseiro -->
+                    <div class="bg-brand-card rounded-3xl overflow-hidden card-hover shadow-soft border border-brand-accent/10 flex flex-col animate-fade-in delay-100 group">
+                        <div class="h-64 img-zoom-container relative">
+                            <img src="https://images.unsplash.com/photo-1589367920969-ab8e050eb0e9?q=80&w=2000&auto=format&fit=crop" alt="Pão Caseiro" class="w-full h-full object-cover">
+                            <!-- Overlay Gradient só na base da imagem -->
+                            <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/60 to-transparent"></div>
+                            <h3 class="absolute bottom-4 left-6 text-2xl font-serif font-bold text-white drop-shadow-md">Pão Caseiro</h3>
                         </div>
-                        <div class="p-6 flex-grow flex flex-col justify-between">
-                            <p class="text-brand-text/90 leading-relaxed mb-6 italic">
-                                "Dia sim, dia também, pão caseiro aqui tem. Macio, quentinho e perfeito para qualquer hora do dia."
+                        <div class="p-6 md:p-8 flex-grow flex flex-col justify-between">
+                            <p class="text-brand-text/80 leading-relaxed mb-8 text-center sm:text-left relative">
+                                <span class="text-brand-accent text-3xl absolute -top-4 -left-2 opacity-30">"</span>
+                                Dia sim, dia também, pão caseiro aqui tem. Macio, quentinho e perfeito para qualquer hora do dia.
+                                <span class="text-brand-accent text-3xl absolute -bottom-6 -right-2 opacity-30">"</span>
                             </p>
                             <a href="https://wa.me/5519989389191" target="_blank" rel="noopener noreferrer" 
-                               class="w-full block text-center py-3 px-4 bg-brand-whatsapp hover:bg-brand-whatsappHover text-white font-semibold rounded-xl shadow-md transition-colors duration-300">
-                                <i class="fab fa-whatsapp mr-2"></i> Pedir Pão Caseiro
+                               class="w-full inline-flex items-center justify-center py-4 px-4 bg-brand-whatsapp text-white font-bold rounded-2xl shadow-lg hover:shadow-glow transition-all duration-300 transform group-hover:-translate-y-1">
+                                <i class="fab fa-whatsapp mr-2 text-xl"></i> Quero meu Pão
                             </a>
                         </div>
                     </div>
 
-                    <!-- Card 2 -->
-                    <div class="bg-black/40 backdrop-blur-sm border border-brand-accent/30 rounded-2xl overflow-hidden card-hover transition-all duration-300 flex flex-col">
-                        <div class="h-64 overflow-hidden relative">
-                            <img src="https://images.unsplash.com/photo-1508213824874-601cb89b52a1?q=80&w=2000&auto=format&fit=crop" alt="Batata Recheada" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-                            <h3 class="absolute bottom-4 left-6 text-2xl font-serif font-bold text-white">Batata Recheada</h3>
+                    <!-- Card 2: Batata Recheada -->
+                    <div class="bg-brand-card rounded-3xl overflow-hidden card-hover shadow-soft border border-brand-accent/10 flex flex-col animate-fade-in delay-200 group">
+                        <div class="h-64 img-zoom-container relative">
+                            <!-- Imagem de batata recheada apetitosa -->
+                            <img src="https://images.unsplash.com/photo-1627308595229-7830f5c928fa?q=80&w=2000&auto=format&fit=crop" alt="Batata Recheada" class="w-full h-full object-cover">
+                            <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/60 to-transparent"></div>
+                            <h3 class="absolute bottom-4 left-6 text-2xl font-serif font-bold text-white drop-shadow-md">Batata Recheada</h3>
                         </div>
-                        <div class="p-6 flex-grow flex flex-col justify-between">
-                            <p class="text-brand-text/90 leading-relaxed mb-6 italic">
-                                "A verdadeira batata recheada da Bendita Fornada. Nem no shopping tem igual! Encomende para experimentar."
+                        <div class="p-6 md:p-8 flex-grow flex flex-col justify-between">
+                            <p class="text-brand-text/80 leading-relaxed mb-8 text-center sm:text-left relative">
+                                <span class="text-brand-accent text-3xl absolute -top-4 -left-2 opacity-30">"</span>
+                                A verdadeira batata recheada da Bendita Fornada. Nem no shopping tem igual! Encomende para experimentar.
+                                <span class="text-brand-accent text-3xl absolute -bottom-6 -right-2 opacity-30">"</span>
                             </p>
                             <a href="https://wa.me/5519989389191" target="_blank" rel="noopener noreferrer" 
-                               class="w-full block text-center py-3 px-4 bg-brand-whatsapp hover:bg-brand-whatsappHover text-white font-semibold rounded-xl shadow-md transition-colors duration-300">
-                                <i class="fab fa-whatsapp mr-2"></i> Pedir Batata Recheada
+                               class="w-full inline-flex items-center justify-center py-4 px-4 bg-brand-whatsapp text-white font-bold rounded-2xl shadow-lg hover:shadow-glow transition-all duration-300 transform group-hover:-translate-y-1">
+                                <i class="fab fa-whatsapp mr-2 text-xl"></i> Quero Batata Recheada
                             </a>
                         </div>
                     </div>
 
-                    <!-- Card 3 -->
-                    <div class="bg-black/40 backdrop-blur-sm border border-brand-accent/30 rounded-2xl overflow-hidden card-hover transition-all duration-300 flex flex-col">
-                        <div class="h-64 overflow-hidden relative">
-                            <img src="https://images.unsplash.com/photo-1598514982205-f36b96d1e8d4?q=80&w=2000&auto=format&fit=crop" alt="Frango Assado & Carnes" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-                            <h3 class="absolute bottom-4 left-6 text-2xl font-serif font-bold text-white">Frango Assado</h3>
+                    <!-- Card 3: Frango Assado -->
+                    <div class="bg-brand-card rounded-3xl overflow-hidden card-hover shadow-soft border border-brand-accent/10 flex flex-col animate-fade-in delay-300 group">
+                        <div class="h-64 img-zoom-container relative">
+                            <img src="https://images.unsplash.com/photo-1598514982205-f36b96d1e8d4?q=80&w=2000&auto=format&fit=crop" alt="Frango Assado" class="w-full h-full object-cover">
+                            <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/60 to-transparent"></div>
+                            <h3 class="absolute bottom-4 left-6 text-2xl font-serif font-bold text-white drop-shadow-md">Frango Assado</h3>
                         </div>
-                        <div class="p-6 flex-grow flex flex-col justify-between">
-                            <p class="text-brand-text/90 leading-relaxed mb-6 italic">
-                                "Frango assado com cebola, batata e tomate. Pensa numa mistura saborosa. Deu água na boca? Encomende um!"
+                        <div class="p-6 md:p-8 flex-grow flex flex-col justify-between">
+                            <p class="text-brand-text/80 leading-relaxed mb-8 text-center sm:text-left relative">
+                                <span class="text-brand-accent text-3xl absolute -top-4 -left-2 opacity-30">"</span>
+                                Frango assado com cebola, batata e tomate. Pensa numa mistura saborosa. Deu água na boca? Encomende um!
+                                <span class="text-brand-accent text-3xl absolute -bottom-6 -right-2 opacity-30">"</span>
                             </p>
                             <a href="https://wa.me/5519989389191" target="_blank" rel="noopener noreferrer" 
-                               class="w-full block text-center py-3 px-4 bg-brand-whatsapp hover:bg-brand-whatsappHover text-white font-semibold rounded-xl shadow-md transition-colors duration-300">
-                                <i class="fab fa-whatsapp mr-2"></i> Pedir Frango Assado
+                               class="w-full inline-flex items-center justify-center py-4 px-4 bg-brand-whatsapp text-white font-bold rounded-2xl shadow-lg hover:shadow-glow transition-all duration-300 transform group-hover:-translate-y-1">
+                                <i class="fab fa-whatsapp mr-2 text-xl"></i> Quero Frango Assado
                             </a>
                         </div>
                     </div>
@@ -201,30 +261,35 @@
     </main>
 
     <!-- 5. Rodapé (Footer) -->
-    <footer class="bg-black/80 border-t border-brand-accent/20 py-12 mt-auto">
+    <footer class="bg-brand-text text-brand-bg py-16 mt-auto">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center text-center">
-            <div class="mb-6">
-                <a href="#" class="inline-flex flex-col items-center justify-center border border-brand-accent rounded-full w-20 h-20 p-1 bg-brand-bg opacity-80 hover:opacity-100 transition-opacity">
-                    <span class="font-serif font-bold text-brand-accent text-sm tracking-widest leading-tight text-center">BENDITA<br>FORNADA</span>
+            
+            <div class="mb-8 bg-brand-bg rounded-full p-2">
+                <img src="assets/logo.png" alt="Logo Bendita Fornada" class="h-24 w-auto drop-shadow-md">
+            </div>
+            
+            <p class="font-script text-2xl md:text-3xl text-brand-accent mb-8">
+                Artesanal. Fresco. Delicioso.
+            </p>
+            
+            <div class="flex flex-col md:flex-row items-center gap-6 mb-12">
+                <a href="https://wa.me/5519989389191" target="_blank" rel="noopener noreferrer" 
+                   class="bg-brand-whatsapp hover:bg-brand-whatsappHover text-white py-3 px-8 rounded-full font-bold text-lg flex items-center gap-2 transition-all transform hover:scale-105 shadow-glow">
+                    <i class="fab fa-whatsapp text-2xl"></i> Encomende Agora: (19) 98938-9191
                 </a>
             </div>
-            <h4 class="font-serif text-xl sm:text-2xl text-brand-accent mb-2">Bendita Fornada</h4>
-            <p class="text-brand-text/70 mb-6 font-light">Artesanal, Fresco, Delicioso.</p>
             
-            <a href="https://wa.me/5519989389191" target="_blank" rel="noopener noreferrer" 
-               class="text-brand-whatsapp hover:text-brand-whatsappHover font-bold text-xl flex items-center gap-2 transition-colors">
-                <i class="fab fa-whatsapp"></i> (19) 98938-9191
-            </a>
+            <div class="w-24 h-px bg-brand-accent/30 mb-8"></div>
             
-            <p class="mt-10 text-brand-text/40 text-sm">
-                &copy; 2026 Bendita Fornada. Todos os direitos reservados.
+            <p class="text-brand-bg/50 text-sm">
+                &copy; 2026 Bendita Fornada. Feito com afeto.
             </p>
         </div>
     </footer>
 
     <!-- 4. Botão Flutuante (FAB) WhatsApp -->
     <a href="https://wa.me/5519989389191" target="_blank" rel="noopener noreferrer" 
-       class="fixed bottom-6 right-6 sm:bottom-10 sm:right-10 z-[100] w-16 h-16 bg-brand-whatsapp text-white rounded-full flex items-center justify-center text-3xl shadow-[0_4px_20px_0_rgba(37,211,102,0.5)] hover:bg-brand-whatsappHover hover:scale-110 transition-all duration-300 whatsapp-pulse"
+       class="fixed bottom-6 right-6 sm:bottom-10 sm:right-10 z-[100] w-14 h-14 md:w-16 md:h-16 bg-brand-whatsapp text-white rounded-full flex items-center justify-center text-3xl shadow-glow hover:bg-brand-whatsappHover hover:scale-110 transition-all duration-300 whatsapp-pulse"
        aria-label="Fazer Encomenda pelo WhatsApp">
         <i class="fab fa-whatsapp"></i>
     </a>
