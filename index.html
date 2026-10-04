@@ -138,54 +138,34 @@
     </header>
 
     <main class="flex-grow">
-        <!-- 2. Hero Section (Imagem de Fundo com Efeito Vidro Fosco) -->
-        <section class="relative min-h-[85vh] md:min-h-[90vh] flex items-center justify-center overflow-hidden">
-            <!-- Background Image -->
-            <div class="absolute inset-0 z-0">
-                <img src="assets/pao_caseiro.jpg" 
-                     alt="Pães artesanais macios" 
-                     class="w-full h-full object-cover animate-ken-burns foto-unificada object-center">
-                <!-- Overlay sutil para garantir leitura e dar o tom fosco -->
-                <div class="absolute inset-0 bg-brand-text/30"></div>
-            </div>
-
-            <!-- Content Container -->
-            <div class="relative z-10 w-full max-w-4xl mx-auto px-4 sm:px-6 mt-16 md:mt-0">
-                <!-- Camada Fosca Transparente (Glassmorphism) -->
-                <div class="bg-white/80 backdrop-blur-md border border-white/60 p-8 sm:p-10 md:p-16 rounded-[2.5rem] shadow-2xl text-center transform transition-all animate-fade-in">
-                    
-                    <span class="font-script text-2xl sm:text-3xl md:text-4xl text-brand-accentDark mb-2 block transform -rotate-2">
-                        Feito com muito afeto
-                    </span>
-                    
-                    <!-- Título -->
-                    <h1 class="text-[2.5rem] leading-[1.1] sm:text-5xl md:text-6xl lg:text-7xl font-bold font-serif text-brand-text mb-4 md:mb-6">
-                        Artesanal. Fresco. Delicioso.
-                    </h1>
-                    
-                    <!-- Subtítulo -->
-                    <p class="text-base sm:text-lg md:text-xl text-brand-text/90 font-medium mb-8 md:mb-10 max-w-2xl mx-auto">
-                        Da nossa família para a sua mesa. Pães macios, batatas recheadas, massas e doces irresistíveis.
-                    </p>
-                    
-                    <!-- CTA Botão Principal -->
-                    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                        <a href="https://wa.me/5519989389191" target="_blank" rel="noopener noreferrer" 
-                           class="whatsapp-pulse inline-flex items-center justify-center px-6 py-4 md:px-8 md:py-4 bg-brand-whatsapp hover:bg-brand-whatsappHover text-white text-lg md:text-xl font-bold rounded-full transition-transform hover:scale-105 duration-300 gap-3 w-full sm:w-auto shadow-[0_4px_20px_rgba(37,211,102,0.4)]">
-                            <i class="fab fa-whatsapp text-2xl"></i>
-                            Faça sua Encomenda!
-                        </a>
-                    </div>
-                    
-                    <!-- Footer do CTA -->
-                    <p class="mt-6 text-sm md:text-base font-bold text-brand-accentDark flex items-center justify-center gap-2">
-                        <i class="fas fa-fire-burner"></i> Saindo do forno agora mesmo
-                    </p>
+        <!-- 2. Hero Section (Minimalista e Elegante) -->
+        <section class="relative pt-12 pb-16 md:pt-24 md:pb-24 overflow-hidden">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center animate-fade-in">
+                
+                <span class="font-script text-2xl sm:text-3xl md:text-4xl text-brand-accentDark mb-3 block transform -rotate-2">
+                    Feito com muito afeto
+                </span>
+                
+                <h1 class="text-[3rem] leading-[1.1] sm:text-6xl md:text-7xl lg:text-[5.5rem] font-bold font-serif text-brand-text mb-6">
+                    Artesanal. Fresco. Delicioso.
+                </h1>
+                
+                <p class="text-base sm:text-lg md:text-xl text-brand-text/80 font-medium mb-10 max-w-2xl mx-auto">
+                    Da nossa família para a sua mesa. Pães macios, batatas recheadas, massas e doces irresistíveis que vão transformar o seu dia.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <a href="https://wa.me/5519989389191" target="_blank" rel="noopener noreferrer" 
+                       class="whatsapp-pulse inline-flex items-center justify-center px-8 py-4 md:px-10 md:py-5 bg-brand-whatsapp hover:bg-brand-whatsappHover text-white text-lg md:text-xl font-bold rounded-full transition-transform hover:scale-105 duration-300 gap-3 w-full sm:w-auto shadow-[0_4px_20px_rgba(37,211,102,0.4)]">
+                        <i class="fab fa-whatsapp text-3xl"></i>
+                        Faça sua Encomenda!
+                    </a>
+                </div>
+                
+                <div class="mt-8 flex items-center justify-center gap-2 text-brand-accentDark font-bold text-sm md:text-base">
+                    <i class="fas fa-motorcycle"></i> Entregamos quentinho na sua casa
                 </div>
             </div>
-            
-            <!-- Degrade na base para unir com a próxima sessão -->
-            <div class="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-t from-brand-bg to-transparent z-10 pointer-events-none"></div>
         </section>
 
         <!-- 3. Menu / Os 5 Carros Chefe -->
