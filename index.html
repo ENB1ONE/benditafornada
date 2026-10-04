@@ -13,11 +13,11 @@
                 extend: {
                     colors: {
                         brand: {
-                            bg: '#FDF8F2', // Creme muito suave e apetitoso
+                            bg: '#FDF8F2',
                             card: '#FFFFFF',
-                            text: '#4A2511', // Marrom chocolate profundo
-                            accent: '#D99B58', // Caramelo dourado
-                            accentDark: '#8E3B20', // Marrom avermelhado
+                            text: '#4A2511',
+                            accent: '#D99B58',
+                            accentDark: '#8E3B20',
                             whatsapp: '#25D366',
                             whatsappHover: '#1DA851'
                         }
@@ -25,7 +25,7 @@
                     fontFamily: {
                         serif: ['"Playfair Display"', 'serif'],
                         sans: ['Inter', 'sans-serif'],
-                        script: ['"Dancing Script"', 'cursive'], // Fonte cursiva para detalhes
+                        script: ['"Dancing Script"', 'cursive'],
                     },
                     boxShadow: {
                         'soft': '0 10px 40px -10px rgba(74, 37, 17, 0.1)',
@@ -41,21 +41,20 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
     
-    <!-- Font Awesome for Icons -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         body {
             background-color: #FDF8F2;
             color: #4A2511;
+            overflow-x: hidden;
         }
         
-        /* Pattern sutil para dar textura de padaria/papel manteiga */
         .bakery-pattern {
             background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d99b58' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
         }
 
-        /* Efeitos de Hover e Animações Dinâmicas */
         .card-hover {
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
@@ -68,10 +67,10 @@
             overflow: hidden;
         }
         .img-zoom-container img {
-            transition: transform 0.7s ease;
+            transition: transform 1.5s ease;
         }
         .card-hover:hover .img-zoom-container img {
-            transform: scale(1.08);
+            transform: scale(1.1);
         }
 
         .whatsapp-pulse {
@@ -84,7 +83,46 @@
             100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
         }
 
-        /* Entrada Suave dos Elementos (Fade In Up) */
+        /* Efeito Fumaça / Vapor para a foto principal */
+        .steam-container {
+            position: absolute;
+            top: 10%;
+            left: 30%;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 20;
+            opacity: 0.6;
+        }
+        .steam {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: #FFF;
+            border-radius: 50%;
+            filter: blur(15px);
+            animation: rise 4s infinite ease-in;
+            opacity: 0;
+        }
+        .steam:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .steam:nth-child(2) { left: 30%; animation-delay: 1.5s; width: 50px; height: 50px; }
+        .steam:nth-child(3) { left: 50%; animation-delay: 0.8s; }
+
+        @keyframes rise {
+            0% { transform: translateY(0) scale(1); opacity: 0; }
+            30% { opacity: 0.4; }
+            100% { transform: translateY(-100px) scale(3); opacity: 0; }
+        }
+
+        /* Ken Burns Effect na Hero Image */
+        @keyframes kenBurns {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.15); }
+        }
+        .animate-ken-burns {
+            animation: kenBurns 20s alternate infinite linear;
+        }
+
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -96,6 +134,8 @@
         .delay-100 { animation-delay: 0.1s; }
         .delay-200 { animation-delay: 0.2s; }
         .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-500 { animation-delay: 0.5s; }
     </style>
 </head>
 <body class="font-sans antialiased bakery-pattern min-h-screen flex flex-col selection:bg-brand-accent selection:text-white">
@@ -104,14 +144,11 @@
     <header class="sticky top-0 z-50 bg-brand-bg/90 backdrop-blur-md border-b border-brand-accent/20 shadow-sm transition-all duration-300">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-24">
-                <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center">
                     <a href="#" class="block transform hover:scale-105 transition-transform duration-300">
-                        <!-- Utilizando a logo original enviada pelo cliente -->
                         <img src="assets/logo.png" alt="Logo Bendita Fornada" class="h-20 w-auto drop-shadow-sm">
                     </a>
                 </div>
-                <!-- CTA Button -->
                 <div class="flex items-center">
                     <a href="https://wa.me/5519989389191" target="_blank" rel="noopener noreferrer" 
                        class="inline-flex items-center justify-center px-4 py-2.5 md:px-6 md:py-3 bg-brand-whatsapp hover:bg-brand-whatsappHover text-white font-semibold rounded-full shadow-md hover:shadow-glow transition-all duration-300 gap-2 text-sm md:text-base transform hover:-translate-y-1">
@@ -125,13 +162,12 @@
     </header>
 
     <main class="flex-grow">
-        <!-- 2. Hero Section (Split Layout para melhor foco na comida e mobile) -->
+        <!-- 2. Hero Section com Animação -->
         <section class="relative pt-12 pb-20 md:pt-24 md:pb-32 overflow-hidden">
             <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div class="flex flex-col md:flex-row items-center gap-12 md:gap-8">
                     
-                    <!-- Text Content -->
-                    <div class="md:w-1/2 text-center md:text-left animate-fade-in">
+                    <div class="md:w-1/2 text-center md:text-left animate-fade-in z-20">
                         <span class="font-script text-3xl md:text-4xl text-brand-accentDark mb-2 block transform -rotate-2">
                             Feito com muito afeto
                         </span>
@@ -139,7 +175,7 @@
                             Artesanal.<br>Fresco.<br>Delicioso.
                         </h1>
                         <p class="text-lg md:text-xl text-brand-text/80 font-light mb-8 max-w-lg mx-auto md:mx-0">
-                            Da nossa família para a sua mesa. Pães caseiros, batatas recheadas e assados irresistíveis, saindo do forno direto para você.
+                            Da nossa família para a sua mesa. Pães macios, batatas recheadas, massas e doces irresistíveis.
                         </p>
                         
                         <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start items-center">
@@ -150,25 +186,31 @@
                             </a>
                         </div>
                         <p class="mt-4 text-sm font-medium text-brand-accentDark flex items-center justify-center md:justify-start gap-2">
-                            <i class="fas fa-motorcycle"></i> Entregamos quentinho na sua casa
+                            <i class="fas fa-fire-burner"></i> Saindo do forno agora mesmo
                         </p>
                     </div>
 
-                    <!-- Image Content -->
                     <div class="md:w-1/2 relative animate-fade-in delay-200">
-                        <!-- Imagem circular/arredondada super apetitosa -->
-                        <div class="relative rounded-t-[50%] rounded-b-3xl overflow-hidden shadow-2xl border-4 border-white aspect-[4/5] md:aspect-square">
-                            <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=2072&auto=format&fit=crop" 
-                                 alt="Pão artesanal rústico" 
-                                 class="w-full h-full object-cover">
-                            <!-- Badge/Selo Flutuante -->
-                            <div class="absolute -bottom-4 -right-4 md:bottom-8 md:-left-8 bg-brand-card rounded-full p-4 shadow-xl border-2 border-brand-accent flex items-center gap-3 transform rotate-3">
+                        <div class="relative rounded-t-[50%] rounded-b-3xl overflow-hidden shadow-2xl border-4 border-white aspect-[4/5] md:aspect-square group">
+                            <!-- Efeito Ken Burns na Imagem para dar sensação de vídeo/movimento -->
+                            <img src="https://images.unsplash.com/photo-1608198093002-ad4e005484ec?q=80&w=2000&auto=format&fit=crop" 
+                                 alt="Pão artesanal macio dourado" 
+                                 class="w-full h-full object-cover animate-ken-burns">
+                            
+                            <!-- Efeito de Fumaça/Vapor CSS para dar água na boca -->
+                            <div class="steam-container">
+                                <div class="steam"></div>
+                                <div class="steam"></div>
+                                <div class="steam"></div>
+                            </div>
+
+                            <div class="absolute -bottom-4 -right-4 md:bottom-8 md:-left-8 bg-brand-card rounded-full p-4 shadow-xl border-2 border-brand-accent flex items-center gap-3 transform rotate-3 z-30 transition-transform group-hover:scale-110">
                                 <div class="bg-brand-accentDark text-white w-12 h-12 rounded-full flex items-center justify-center text-xl">
-                                    <i class="fas fa-fire"></i>
+                                    <i class="fas fa-heart"></i>
                                 </div>
                                 <div class="pr-2">
-                                    <p class="text-xs font-bold text-brand-text uppercase tracking-wide">Recém Saído</p>
-                                    <p class="font-script text-xl text-brand-accentDark leading-none">do forno!</p>
+                                    <p class="text-xs font-bold text-brand-text uppercase tracking-wide">Macio e</p>
+                                    <p class="font-script text-xl text-brand-accentDark leading-none">Quentinho</p>
                                 </div>
                             </div>
                         </div>
@@ -178,31 +220,32 @@
             </div>
         </section>
 
-        <!-- 3. Menu / Os Mais Pedidos -->
+        <!-- 3. Menu / Os 5 Carros Chefe -->
         <section class="py-20 md:py-32 bg-white/50 backdrop-blur-sm border-y border-brand-accent/10" id="menu">
             <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 
                 <div class="text-center mb-16 animate-fade-in">
                     <span class="font-script text-3xl text-brand-accent mb-2 block">Destaques do menu</span>
-                    <h2 class="text-4xl md:text-5xl font-serif font-bold text-brand-text mb-6">Os Mais Pedidos</h2>
+                    <h2 class="text-4xl md:text-5xl font-serif font-bold text-brand-text mb-6">Nossos Carros Chefe</h2>
                     <div class="h-1 w-24 bg-brand-accent mx-auto rounded-full mb-6 opacity-60"></div>
                     <p class="text-lg text-brand-text/70 max-w-2xl mx-auto">
-                        Receitas exclusivas, ingredientes selecionados e aquele gostinho de comida feita em casa.
+                        Os favoritos da nossa fornada. Perfeitos para qualquer momento do seu dia.
                     </p>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+                <!-- Flex container para centralizar as linhas (3 em cima, 2 em baixo) -->
+                <div class="flex flex-wrap justify-center gap-8 md:gap-10">
                     
                     <!-- Card 1: Pão Caseiro -->
-                    <div class="bg-brand-card rounded-3xl overflow-hidden card-hover shadow-soft border border-brand-accent/10 flex flex-col animate-fade-in delay-100 group">
+                    <div class="w-full md:w-[calc(50%-1.25rem)] lg:w-[calc(33.333%-1.66rem)] bg-brand-card rounded-3xl overflow-hidden card-hover shadow-soft border border-brand-accent/10 flex flex-col animate-fade-in delay-100 group">
                         <div class="h-64 img-zoom-container relative">
-                            <img src="https://images.unsplash.com/photo-1589367920969-ab8e050eb0e9?q=80&w=2000&auto=format&fit=crop" alt="Pão Caseiro" class="w-full h-full object-cover">
-                            <!-- Overlay Gradient só na base da imagem -->
-                            <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/60 to-transparent"></div>
+                            <!-- Imagem do pão macio na assadeira -->
+                            <img src="https://images.unsplash.com/photo-1608198093002-ad4e005484ec?q=80&w=1000&auto=format&fit=crop" alt="Pão Caseiro Macio" class="w-full h-full object-cover">
+                            <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/70 to-transparent"></div>
                             <h3 class="absolute bottom-4 left-6 text-2xl font-serif font-bold text-white drop-shadow-md">Pão Caseiro</h3>
                         </div>
                         <div class="p-6 md:p-8 flex-grow flex flex-col justify-between">
-                            <p class="text-brand-text/80 leading-relaxed mb-8 text-center sm:text-left relative">
+                            <p class="text-brand-text/80 leading-relaxed mb-8 text-center sm:text-left relative z-10">
                                 <span class="text-brand-accent text-3xl absolute -top-4 -left-2 opacity-30">"</span>
                                 Dia sim, dia também, pão caseiro aqui tem. Macio, quentinho e perfeito para qualquer hora do dia.
                                 <span class="text-brand-accent text-3xl absolute -bottom-6 -right-2 opacity-30">"</span>
@@ -215,15 +258,14 @@
                     </div>
 
                     <!-- Card 2: Batata Recheada -->
-                    <div class="bg-brand-card rounded-3xl overflow-hidden card-hover shadow-soft border border-brand-accent/10 flex flex-col animate-fade-in delay-200 group">
+                    <div class="w-full md:w-[calc(50%-1.25rem)] lg:w-[calc(33.333%-1.66rem)] bg-brand-card rounded-3xl overflow-hidden card-hover shadow-soft border border-brand-accent/10 flex flex-col animate-fade-in delay-200 group">
                         <div class="h-64 img-zoom-container relative">
-                            <!-- Imagem de batata recheada apetitosa -->
-                            <img src="https://images.unsplash.com/photo-1627308595229-7830f5c928fa?q=80&w=2000&auto=format&fit=crop" alt="Batata Recheada" class="w-full h-full object-cover">
-                            <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/60 to-transparent"></div>
+                            <img src="https://images.unsplash.com/photo-1515516969-d4008cc6241a?q=80&w=1000&auto=format&fit=crop" alt="Batata Recheada" class="w-full h-full object-cover">
+                            <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/70 to-transparent"></div>
                             <h3 class="absolute bottom-4 left-6 text-2xl font-serif font-bold text-white drop-shadow-md">Batata Recheada</h3>
                         </div>
                         <div class="p-6 md:p-8 flex-grow flex flex-col justify-between">
-                            <p class="text-brand-text/80 leading-relaxed mb-8 text-center sm:text-left relative">
+                            <p class="text-brand-text/80 leading-relaxed mb-8 text-center sm:text-left relative z-10">
                                 <span class="text-brand-accent text-3xl absolute -top-4 -left-2 opacity-30">"</span>
                                 A verdadeira batata recheada da Bendita Fornada. Nem no shopping tem igual! Encomende para experimentar.
                                 <span class="text-brand-accent text-3xl absolute -bottom-6 -right-2 opacity-30">"</span>
@@ -236,14 +278,14 @@
                     </div>
 
                     <!-- Card 3: Frango Assado -->
-                    <div class="bg-brand-card rounded-3xl overflow-hidden card-hover shadow-soft border border-brand-accent/10 flex flex-col animate-fade-in delay-300 group">
+                    <div class="w-full md:w-[calc(50%-1.25rem)] lg:w-[calc(33.333%-1.66rem)] bg-brand-card rounded-3xl overflow-hidden card-hover shadow-soft border border-brand-accent/10 flex flex-col animate-fade-in delay-300 group">
                         <div class="h-64 img-zoom-container relative">
-                            <img src="https://images.unsplash.com/photo-1598514982205-f36b96d1e8d4?q=80&w=2000&auto=format&fit=crop" alt="Frango Assado" class="w-full h-full object-cover">
-                            <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/60 to-transparent"></div>
+                            <img src="https://images.unsplash.com/photo-1598514982205-f36b96d1e8d4?q=80&w=1000&auto=format&fit=crop" alt="Frango Assado" class="w-full h-full object-cover">
+                            <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/70 to-transparent"></div>
                             <h3 class="absolute bottom-4 left-6 text-2xl font-serif font-bold text-white drop-shadow-md">Frango Assado</h3>
                         </div>
                         <div class="p-6 md:p-8 flex-grow flex flex-col justify-between">
-                            <p class="text-brand-text/80 leading-relaxed mb-8 text-center sm:text-left relative">
+                            <p class="text-brand-text/80 leading-relaxed mb-8 text-center sm:text-left relative z-10">
                                 <span class="text-brand-accent text-3xl absolute -top-4 -left-2 opacity-30">"</span>
                                 Frango assado com cebola, batata e tomate. Pensa numa mistura saborosa. Deu água na boca? Encomende um!
                                 <span class="text-brand-accent text-3xl absolute -bottom-6 -right-2 opacity-30">"</span>
@@ -251,6 +293,48 @@
                             <a href="https://wa.me/5519989389191" target="_blank" rel="noopener noreferrer" 
                                class="w-full inline-flex items-center justify-center py-4 px-4 bg-brand-whatsapp text-white font-bold rounded-2xl shadow-lg hover:shadow-glow transition-all duration-300 transform group-hover:-translate-y-1">
                                 <i class="fab fa-whatsapp mr-2 text-xl"></i> Quero Frango Assado
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Card 4: Panqueca -->
+                    <div class="w-full md:w-[calc(50%-1.25rem)] lg:w-[calc(33.333%-1.66rem)] bg-brand-card rounded-3xl overflow-hidden card-hover shadow-soft border border-brand-accent/10 flex flex-col animate-fade-in delay-400 group">
+                        <div class="h-64 img-zoom-container relative">
+                            <!-- Foto semelhante à panqueca salgada enviada -->
+                            <img src="https://images.unsplash.com/photo-1534353436294-0dbd4bdac845?q=80&w=1000&auto=format&fit=crop" alt="Panqueca Artesanal" class="w-full h-full object-cover">
+                            <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/70 to-transparent"></div>
+                            <h3 class="absolute bottom-4 left-6 text-2xl font-serif font-bold text-white drop-shadow-md">Panquecas</h3>
+                        </div>
+                        <div class="p-6 md:p-8 flex-grow flex flex-col justify-between">
+                            <p class="text-brand-text/80 leading-relaxed mb-8 text-center sm:text-left relative z-10">
+                                <span class="text-brand-accent text-3xl absolute -top-4 -left-2 opacity-30">"</span>
+                                Panqueca salgada ou doce são sempre bem vindas, hummm! Experimente nossa massa levinha e muito recheio.
+                                <span class="text-brand-accent text-3xl absolute -bottom-6 -right-2 opacity-30">"</span>
+                            </p>
+                            <a href="https://wa.me/5519989389191" target="_blank" rel="noopener noreferrer" 
+                               class="w-full inline-flex items-center justify-center py-4 px-4 bg-brand-whatsapp text-white font-bold rounded-2xl shadow-lg hover:shadow-glow transition-all duration-300 transform group-hover:-translate-y-1">
+                                <i class="fab fa-whatsapp mr-2 text-xl"></i> Quero Panquecas
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Card 5: Bolo de Pote -->
+                    <div class="w-full md:w-[calc(50%-1.25rem)] lg:w-[calc(33.333%-1.66rem)] bg-brand-card rounded-3xl overflow-hidden card-hover shadow-soft border border-brand-accent/10 flex flex-col animate-fade-in delay-500 group">
+                        <div class="h-64 img-zoom-container relative">
+                            <!-- Exatamente a foto enviada pelo usuário -->
+                            <img src="assets/bolo_de_pote.jpg" alt="Bolo de Pote" class="w-full h-full object-cover">
+                            <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/70 to-transparent"></div>
+                            <h3 class="absolute bottom-4 left-6 text-2xl font-serif font-bold text-white drop-shadow-md">Bolo de Pote</h3>
+                        </div>
+                        <div class="p-6 md:p-8 flex-grow flex flex-col justify-between">
+                            <p class="text-brand-text/80 leading-relaxed mb-8 text-center sm:text-left relative z-10">
+                                <span class="text-brand-accent text-3xl absolute -top-4 -left-2 opacity-30">"</span>
+                                Para fechar com chave de ouro! Cremoso, molhadinho e feito com puro afeto. É impossível comer um só!
+                                <span class="text-brand-accent text-3xl absolute -bottom-6 -right-2 opacity-30">"</span>
+                            </p>
+                            <a href="https://wa.me/5519989389191" target="_blank" rel="noopener noreferrer" 
+                               class="w-full inline-flex items-center justify-center py-4 px-4 bg-brand-whatsapp text-white font-bold rounded-2xl shadow-lg hover:shadow-glow transition-all duration-300 transform group-hover:-translate-y-1">
+                                <i class="fab fa-whatsapp mr-2 text-xl"></i> Quero Bolo de Pote
                             </a>
                         </div>
                     </div>
