@@ -165,16 +165,16 @@
         <!-- 2. Hero Section com Animação -->
         <section class="relative pt-12 pb-20 md:pt-24 md:pb-32 overflow-hidden">
             <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <div class="flex flex-col md:flex-row items-center gap-12 md:gap-8">
+                <div class="flex flex-col md:flex-row items-center gap-12 md:gap-10">
                     
-                    <div class="md:w-1/2 text-center md:text-left animate-fade-in z-20">
+                    <div class="md:w-[55%] text-center md:text-left animate-fade-in z-20">
                         <span class="font-script text-3xl md:text-4xl text-brand-accentDark mb-2 block transform -rotate-2">
                             Feito com muito afeto
                         </span>
-                        <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold font-serif text-brand-text leading-tight mb-6">
-                            Artesanal.<br>Fresco.<br>Delicioso.
+                        <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-bold font-serif text-brand-text leading-tight mb-6">
+                            Artesanal. Fresco. Delicioso.
                         </h1>
-                        <p class="text-lg md:text-xl text-brand-text/80 font-light mb-8 max-w-lg mx-auto md:mx-0">
+                        <p class="text-lg md:text-xl text-brand-text/80 font-light mb-8 max-w-xl mx-auto md:mx-0">
                             Da nossa família para a sua mesa. Pães macios, batatas recheadas, massas e doces irresistíveis.
                         </p>
                         
@@ -190,25 +190,29 @@
                         </p>
                     </div>
 
-                    <div class="md:w-1/2 relative animate-fade-in delay-200">
-                        <div class="relative rounded-t-[50%] rounded-b-3xl overflow-hidden shadow-2xl border-4 border-white aspect-[4/5] md:aspect-square group">
-                            <!-- Efeito Ken Burns na Imagem para dar sensação de vídeo/movimento -->
-                            <img src="https://images.unsplash.com/photo-1608198093002-ad4e005484ec?q=80&w=2000&auto=format&fit=crop" 
-                                 alt="Pão artesanal macio dourado" 
-                                 class="w-full h-full object-cover animate-ken-burns">
-                            
-                            <!-- Efeito de Fumaça/Vapor CSS para dar água na boca -->
-                            <div class="steam-container">
-                                <div class="steam"></div>
-                                <div class="steam"></div>
-                                <div class="steam"></div>
+                    <div class="md:w-[45%] relative animate-fade-in delay-200">
+                        <div class="relative aspect-[4/5] md:aspect-[3/4] group w-full max-w-md mx-auto">
+                            <!-- Wrapper com overflow-hidden apenas para a imagem e a fumaça -->
+                            <div class="w-full h-full rounded-t-[50%] rounded-b-3xl overflow-hidden shadow-2xl border-4 border-white relative z-10">
+                                <!-- Efeito Ken Burns na Imagem para dar sensação de vídeo/movimento -->
+                                <img src="assets/pao_caseiro.jpg" 
+                                     alt="Pão artesanal macio dourado" 
+                                     class="w-full h-full object-cover animate-ken-burns">
+                                
+                                <!-- Efeito de Fumaça/Vapor CSS para dar água na boca -->
+                                <div class="steam-container">
+                                    <div class="steam"></div>
+                                    <div class="steam"></div>
+                                    <div class="steam"></div>
+                                </div>
                             </div>
 
-                            <div class="absolute -bottom-4 -right-4 md:bottom-8 md:-left-8 bg-brand-card rounded-full p-4 shadow-xl border-2 border-brand-accent flex items-center gap-3 transform rotate-3 z-30 transition-transform group-hover:scale-110">
-                                <div class="bg-brand-accentDark text-white w-12 h-12 rounded-full flex items-center justify-center text-xl">
+                            <!-- Badge posicionado FORA do overflow-hidden para não cortar -->
+                            <div class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 md:translate-x-0 md:-left-8 md:bottom-12 bg-brand-card rounded-full p-4 shadow-xl border-2 border-brand-accent flex items-center gap-3 z-30 transition-transform group-hover:scale-110">
+                                <div class="bg-brand-accentDark text-white w-12 h-12 rounded-full flex items-center justify-center text-xl flex-shrink-0">
                                     <i class="fas fa-heart"></i>
                                 </div>
-                                <div class="pr-2">
+                                <div class="pr-3 whitespace-nowrap">
                                     <p class="text-xs font-bold text-brand-text uppercase tracking-wide">Macio e</p>
                                     <p class="font-script text-xl text-brand-accentDark leading-none">Quentinho</p>
                                 </div>
@@ -239,8 +243,8 @@
                     <!-- Card 1: Pão Caseiro -->
                     <div class="w-full md:w-[calc(50%-1.25rem)] lg:w-[calc(33.333%-1.66rem)] bg-brand-card rounded-3xl overflow-hidden card-hover shadow-soft border border-brand-accent/10 flex flex-col animate-fade-in delay-100 group">
                         <div class="h-64 img-zoom-container relative">
-                            <!-- Imagem do pão macio na assadeira -->
-                            <img src="https://images.unsplash.com/photo-1608198093002-ad4e005484ec?q=80&w=1000&auto=format&fit=crop" alt="Pão Caseiro Macio" class="w-full h-full object-cover">
+                            <!-- Imagem do pão oficial -->
+                            <img src="assets/pao_caseiro.jpg" alt="Pão Caseiro Macio" class="w-full h-full object-cover">
                             <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/70 to-transparent"></div>
                             <h3 class="absolute bottom-4 left-6 text-2xl font-serif font-bold text-white drop-shadow-md">Pão Caseiro</h3>
                         </div>
@@ -300,8 +304,8 @@
                     <!-- Card 4: Panqueca -->
                     <div class="w-full md:w-[calc(50%-1.25rem)] lg:w-[calc(33.333%-1.66rem)] bg-brand-card rounded-3xl overflow-hidden card-hover shadow-soft border border-brand-accent/10 flex flex-col animate-fade-in delay-400 group">
                         <div class="h-64 img-zoom-container relative">
-                            <!-- Foto semelhante à panqueca salgada enviada -->
-                            <img src="https://images.unsplash.com/photo-1534353436294-0dbd4bdac845?q=80&w=1000&auto=format&fit=crop" alt="Panqueca Artesanal" class="w-full h-full object-cover">
+                            <!-- Foto da Panqueca Oficial -->
+                            <img src="assets/panqueca.png" alt="Panqueca Artesanal" class="w-full h-full object-cover">
                             <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/70 to-transparent"></div>
                             <h3 class="absolute bottom-4 left-6 text-2xl font-serif font-bold text-white drop-shadow-md">Panquecas</h3>
                         </div>
