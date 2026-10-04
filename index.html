@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bendita Fornada - Artesanal, Fresco, Delicioso</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            bg: '#2A1610',
+                            text: '#FDF5E6',
+                            accent: '#C69C6D',
+                            whatsapp: '#25D366',
+                            whatsappHover: '#1DA851'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            background-color: #2A1610;
+            color: #FDF5E6;
+        }
+        
+        /* Subtle wood texture overlay using CSS patterns or gradients */
+        .wood-texture {
+            background-image: 
+                linear-gradient(rgba(42, 22, 16, 0.9), rgba(42, 22, 16, 0.95)),
+                url('https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        .hero-bg {
+            background-image: 
+                linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)),
+                url('https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=2072&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+        }
+
+        .whatsapp-pulse {
+            animation: pulse-green 2s infinite;
+        }
+
+        @keyframes pulse-green {
+            0% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+            }
+        }
+    </style>
+</head>
+<body class="font-sans antialiased wood-texture min-h-screen flex flex-col">
+
+    <!-- 1. Cabeçalho (Navbar) -->
+    <header class="sticky top-0 z-50 bg-brand-bg/95 backdrop-blur-sm border-b border-brand-accent/20 shadow-lg transition-all duration-300">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="#" class="flex flex-col items-center justify-center border-2 border-brand-accent rounded-full w-16 h-16 p-1 bg-brand-bg">
+                        <span class="font-serif font-bold text-brand-accent text-xs tracking-wider leading-tight text-center">BENDITA<br>FORNADA</span>
+                    </a>
+                </div>
+                <!-- CTA Button -->
+                <div class="flex items-center">
+                    <a href="https://wa.me/5519989389191" target="_blank" rel="noopener noreferrer" 
+                       class="inline-flex items-center justify-center px-5 py-2.5 bg-brand-whatsapp hover:bg-brand-whatsappHover text-white font-medium rounded-full shadow-lg transition-colors duration-300 gap-2">
+                        <i class="fab fa-whatsapp text-lg"></i>
+                        <span class="hidden sm:inline">Fazer Encomenda</span>
+                        <span class="sm:hidden">Pedir</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        <!-- 2. Hero Section -->
+        <section class="hero-bg relative py-32 sm:py-48 flex items-center justify-center min-h-[70vh]">
+            <div class="absolute inset-0 bg-gradient-to-t from-brand-bg to-transparent"></div>
+            
+            <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <span class="text-brand-accent font-serif italic text-lg sm:text-xl mb-4 block">Bem-vindo à</span>
+                <h1 class="text-4xl sm:text-6xl md:text-7xl font-bold font-serif text-white tracking-tight mb-6 drop-shadow-lg">
+                    Artesanal, Fresco, Delicioso.
+                </h1>
+                <p class="mt-4 text-xl sm:text-2xl text-gray-200 font-light max-w-2xl mx-auto mb-10 drop-shadow-md">
+                    Da nossa família para a sua mesa. Pães caseiros, batatas recheadas e assados feitos com afeto.
+                </p>
+                <div class="mt-8 flex justify-center">
+                    <a href="https://wa.me/5519989389191" target="_blank" rel="noopener noreferrer" 
+                       class="whatsapp-pulse inline-flex items-center px-8 py-4 bg-brand-whatsapp hover:bg-brand-whatsappHover text-white text-lg sm:text-xl font-bold rounded-full shadow-[0_4px_14px_0_rgba(37,211,102,0.39)] transition-transform hover:scale-105 duration-300 gap-3">
+                        <i class="fab fa-whatsapp text-2xl"></i>
+                        Faça sua encomenda! (19) 98938-9191
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Menu / Os Mais Pedidos -->
+        <section class="py-20 sm:py-32 relative z-10" id="menu">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl sm:text-5xl font-serif font-bold text-brand-accent mb-4">Os Mais Pedidos</h2>
+                    <div class="h-1 w-24 bg-brand-accent mx-auto rounded-full mb-6"></div>
+                    <p class="text-lg text-brand-text/80 max-w-2xl mx-auto">Feitos com ingredientes selecionados e muito carinho para adoçar e salgar o seu dia.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                    
+                    <!-- Card 1 -->
+                    <div class="bg-black/40 backdrop-blur-sm border border-brand-accent/30 rounded-2xl overflow-hidden card-hover transition-all duration-300 flex flex-col">
+                        <div class="h-64 overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1589367920969-ab8e050eb0e9?q=80&w=2000&auto=format&fit=crop" alt="Pão Caseiro" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                            <h3 class="absolute bottom-4 left-6 text-2xl font-serif font-bold text-white">Pão Caseiro</h3>
+                        </div>
+                        <div class="p-6 flex-grow flex flex-col justify-between">
+                            <p class="text-brand-text/90 leading-relaxed mb-6 italic">
+                                "Dia sim, dia também, pão caseiro aqui tem. Macio, quentinho e perfeito para qualquer hora do dia."
+                            </p>
+                            <a href="https://wa.me/5519989389191" target="_blank" rel="noopener noreferrer" 
+                               class="w-full block text-center py-3 px-4 bg-brand-whatsapp hover:bg-brand-whatsappHover text-white font-semibold rounded-xl shadow-md transition-colors duration-300">
+                                <i class="fab fa-whatsapp mr-2"></i> Pedir Pão Caseiro
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="bg-black/40 backdrop-blur-sm border border-brand-accent/30 rounded-2xl overflow-hidden card-hover transition-all duration-300 flex flex-col">
+                        <div class="h-64 overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1508213824874-601cb89b52a1?q=80&w=2000&auto=format&fit=crop" alt="Batata Recheada" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                            <h3 class="absolute bottom-4 left-6 text-2xl font-serif font-bold text-white">Batata Recheada</h3>
+                        </div>
+                        <div class="p-6 flex-grow flex flex-col justify-between">
+                            <p class="text-brand-text/90 leading-relaxed mb-6 italic">
+                                "A verdadeira batata recheada da Bendita Fornada. Nem no shopping tem igual! Encomende para experimentar."
+                            </p>
+                            <a href="https://wa.me/5519989389191" target="_blank" rel="noopener noreferrer" 
+                               class="w-full block text-center py-3 px-4 bg-brand-whatsapp hover:bg-brand-whatsappHover text-white font-semibold rounded-xl shadow-md transition-colors duration-300">
+                                <i class="fab fa-whatsapp mr-2"></i> Pedir Batata Recheada
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="bg-black/40 backdrop-blur-sm border border-brand-accent/30 rounded-2xl overflow-hidden card-hover transition-all duration-300 flex flex-col">
+                        <div class="h-64 overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1598514982205-f36b96d1e8d4?q=80&w=2000&auto=format&fit=crop" alt="Frango Assado & Carnes" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                            <h3 class="absolute bottom-4 left-6 text-2xl font-serif font-bold text-white">Frango Assado</h3>
+                        </div>
+                        <div class="p-6 flex-grow flex flex-col justify-between">
+                            <p class="text-brand-text/90 leading-relaxed mb-6 italic">
+                                "Frango assado com cebola, batata e tomate. Pensa numa mistura saborosa. Deu água na boca? Encomende um!"
+                            </p>
+                            <a href="https://wa.me/5519989389191" target="_blank" rel="noopener noreferrer" 
+                               class="w-full block text-center py-3 px-4 bg-brand-whatsapp hover:bg-brand-whatsappHover text-white font-semibold rounded-xl shadow-md transition-colors duration-300">
+                                <i class="fab fa-whatsapp mr-2"></i> Pedir Frango Assado
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 5. Rodapé (Footer) -->
+    <footer class="bg-black/80 border-t border-brand-accent/20 py-12 mt-auto">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center text-center">
+            <div class="mb-6">
+                <a href="#" class="inline-flex flex-col items-center justify-center border border-brand-accent rounded-full w-20 h-20 p-1 bg-brand-bg opacity-80 hover:opacity-100 transition-opacity">
+                    <span class="font-serif font-bold text-brand-accent text-sm tracking-widest leading-tight text-center">BENDITA<br>FORNADA</span>
+                </a>
+            </div>
+            <h4 class="font-serif text-xl sm:text-2xl text-brand-accent mb-2">Bendita Fornada</h4>
+            <p class="text-brand-text/70 mb-6 font-light">Artesanal, Fresco, Delicioso.</p>
+            
+            <a href="https://wa.me/5519989389191" target="_blank" rel="noopener noreferrer" 
+               class="text-brand-whatsapp hover:text-brand-whatsappHover font-bold text-xl flex items-center gap-2 transition-colors">
+                <i class="fab fa-whatsapp"></i> (19) 98938-9191
+            </a>
+            
+            <p class="mt-10 text-brand-text/40 text-sm">
+                &copy; 2026 Bendita Fornada. Todos os direitos reservados.
+            </p>
+        </div>
+    </footer>
+
+    <!-- 4. Botão Flutuante (FAB) WhatsApp -->
+    <a href="https://wa.me/5519989389191" target="_blank" rel="noopener noreferrer" 
+       class="fixed bottom-6 right-6 sm:bottom-10 sm:right-10 z-[100] w-16 h-16 bg-brand-whatsapp text-white rounded-full flex items-center justify-center text-3xl shadow-[0_4px_20px_0_rgba(37,211,102,0.5)] hover:bg-brand-whatsappHover hover:scale-110 transition-all duration-300 whatsapp-pulse"
+       aria-label="Fazer Encomenda pelo WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+</body>
+</html>
