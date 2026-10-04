@@ -28,8 +28,9 @@
                         script: ['"Dancing Script"', 'cursive'],
                     },
                     boxShadow: {
-                        'soft': '0 10px 40px -10px rgba(74, 37, 17, 0.1)',
+                        'soft': '0 10px 40px -10px rgba(74, 37, 17, 0.08)',
                         'glow': '0 0 20px rgba(37, 211, 102, 0.4)',
+                        'cardBtn': '0 4px 15px rgba(217, 155, 88, 0.3)',
                     }
                 }
             }
@@ -59,8 +60,8 @@
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         .card-hover:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 20px 40px -10px rgba(74, 37, 17, 0.15);
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px -10px rgba(74, 37, 17, 0.12);
         }
 
         .img-zoom-container {
@@ -70,7 +71,7 @@
             transition: transform 1.5s ease;
         }
         .card-hover:hover .img-zoom-container img {
-            transform: scale(1.1);
+            transform: scale(1.08);
         }
 
         .whatsapp-pulse {
@@ -81,37 +82,6 @@
             0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5); }
             70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
             100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
-        }
-
-        /* Efeito Fumaça / Vapor para a foto principal */
-        .steam-container {
-            position: absolute;
-            top: 10%;
-            left: 30%;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 20;
-            opacity: 0.6;
-        }
-        .steam {
-            position: absolute;
-            width: 40px;
-            height: 40px;
-            background: #FFF;
-            border-radius: 50%;
-            filter: blur(15px);
-            animation: rise 4s infinite ease-in;
-            opacity: 0;
-        }
-        .steam:nth-child(1) { left: 10%; animation-delay: 0s; }
-        .steam:nth-child(2) { left: 30%; animation-delay: 1.5s; width: 50px; height: 50px; }
-        .steam:nth-child(3) { left: 50%; animation-delay: 0.8s; }
-
-        @keyframes rise {
-            0% { transform: translateY(0) scale(1); opacity: 0; }
-            30% { opacity: 0.4; }
-            100% { transform: translateY(-100px) scale(3); opacity: 0; }
         }
 
         /* Ken Burns Effect na Hero Image */
@@ -131,30 +101,35 @@
             animation: fadeInUp 0.8s ease-out forwards;
             opacity: 0;
         }
+        
         .delay-100 { animation-delay: 0.1s; }
         .delay-200 { animation-delay: 0.2s; }
         .delay-300 { animation-delay: 0.3s; }
         .delay-400 { animation-delay: 0.4s; }
         .delay-500 { animation-delay: 0.5s; }
+
+        /* Filtro Fotográfico Unificador (Sépia/Aquecimento) */
+        .foto-unificada {
+            filter: sepia(0.25) saturate(1.15) contrast(1.05) brightness(0.95);
+        }
     </style>
 </head>
 <body class="font-sans antialiased bakery-pattern min-h-screen flex flex-col selection:bg-brand-accent selection:text-white">
 
     <!-- 1. Cabeçalho (Navbar) -->
-    <header class="sticky top-0 z-50 bg-brand-bg/90 backdrop-blur-md border-b border-brand-accent/20 shadow-sm transition-all duration-300">
+    <header class="sticky top-0 z-50 bg-brand-bg/95 backdrop-blur-md border-b border-brand-accent/20 shadow-sm transition-all duration-300">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-24">
+            <div class="flex justify-between items-center h-20 md:h-24">
                 <div class="flex-shrink-0 flex items-center">
                     <a href="#" class="block transform hover:scale-105 transition-transform duration-300">
-                        <img src="assets/logo.png" alt="Logo Bendita Fornada" class="h-20 w-auto drop-shadow-sm">
+                        <img src="assets/logo.png" alt="Logo Bendita Fornada" class="h-16 md:h-20 w-auto drop-shadow-sm">
                     </a>
                 </div>
                 <div class="flex items-center">
                     <a href="https://wa.me/5519989389191" target="_blank" rel="noopener noreferrer" 
-                       class="inline-flex items-center justify-center px-4 py-2.5 md:px-6 md:py-3 bg-brand-whatsapp hover:bg-brand-whatsappHover text-white font-semibold rounded-full shadow-md hover:shadow-glow transition-all duration-300 gap-2 text-sm md:text-base transform hover:-translate-y-1">
+                       class="inline-flex items-center justify-center px-4 py-2 md:px-6 md:py-2.5 bg-brand-accent hover:bg-brand-accentDark text-white font-semibold rounded-full shadow-cardBtn transition-all duration-300 gap-2 text-sm md:text-base transform hover:-translate-y-1">
                         <i class="fab fa-whatsapp text-lg md:text-xl"></i>
-                        <span class="hidden sm:inline">Fazer Encomenda</span>
-                        <span class="sm:hidden">Pedir</span>
+                        <span class="hidden sm:inline">WhatsApp</span>
                     </a>
                 </div>
             </div>
@@ -162,59 +137,53 @@
     </header>
 
     <main class="flex-grow">
-        <!-- 2. Hero Section com Animação -->
-        <section class="relative pt-12 pb-20 md:pt-24 md:pb-32 overflow-hidden">
+        <!-- 2. Hero Section -->
+        <section class="relative pt-6 pb-12 md:pt-20 md:pb-28 overflow-hidden">
             <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <div class="flex flex-col md:flex-row items-center gap-12 md:gap-10">
+                <div class="flex flex-col md:flex-row items-center gap-8 md:gap-10">
                     
                     <div class="md:w-[55%] text-center md:text-left animate-fade-in z-20">
-                        <span class="font-script text-3xl md:text-4xl text-brand-accentDark mb-2 block transform -rotate-2">
+                        <span class="font-script text-2xl md:text-4xl text-brand-accentDark mb-1 md:mb-2 block transform -rotate-2">
                             Feito com muito afeto
                         </span>
-                        <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-bold font-serif text-brand-text leading-tight mb-6">
+                        <!-- Fonte reduzida no mobile para garantir conteúdo "Above the Fold" -->
+                        <h1 class="text-[2.5rem] leading-[1.1] sm:text-5xl md:text-6xl lg:text-7xl font-bold font-serif text-brand-text mb-4 md:mb-6">
                             Artesanal. Fresco. Delicioso.
                         </h1>
-                        <p class="text-lg md:text-xl text-brand-text/80 font-light mb-8 max-w-xl mx-auto md:mx-0">
+                        <p class="text-base sm:text-lg md:text-xl text-brand-text/80 font-light mb-6 md:mb-8 max-w-xl mx-auto md:mx-0">
                             Da nossa família para a sua mesa. Pães macios, batatas recheadas, massas e doces irresistíveis.
                         </p>
                         
                         <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start items-center">
+                            <!-- Botão Principal com o Verde Oficial -->
                             <a href="https://wa.me/5519989389191" target="_blank" rel="noopener noreferrer" 
-                               class="whatsapp-pulse inline-flex items-center justify-center px-8 py-4 bg-brand-whatsapp hover:bg-brand-whatsappHover text-white text-lg font-bold rounded-full transition-transform hover:scale-105 duration-300 gap-3 w-full sm:w-auto">
-                                <i class="fab fa-whatsapp text-2xl"></i>
+                               class="whatsapp-pulse inline-flex items-center justify-center px-6 py-3.5 md:px-8 md:py-4 bg-brand-whatsapp hover:bg-brand-whatsappHover text-white text-base md:text-lg font-bold rounded-full transition-transform hover:scale-105 duration-300 gap-3 w-full sm:w-auto">
+                                <i class="fab fa-whatsapp text-xl md:text-2xl"></i>
                                 Faça sua Encomenda!
                             </a>
                         </div>
-                        <p class="mt-4 text-sm font-medium text-brand-accentDark flex items-center justify-center md:justify-start gap-2">
+                        <p class="mt-4 text-xs md:text-sm font-medium text-brand-accentDark flex items-center justify-center md:justify-start gap-2">
                             <i class="fas fa-fire-burner"></i> Saindo do forno agora mesmo
                         </p>
                     </div>
 
-                    <div class="md:w-[45%] relative animate-fade-in delay-200">
-                        <div class="relative aspect-[4/5] md:aspect-[3/4] group w-full max-w-md mx-auto">
-                            <!-- Wrapper com overflow-hidden apenas para a imagem e a fumaça -->
-                            <div class="w-full h-full rounded-t-[50%] rounded-b-3xl overflow-hidden shadow-2xl border-4 border-white relative z-10">
-                                <!-- Efeito Ken Burns na Imagem para dar sensação de vídeo/movimento -->
+                    <div class="md:w-[45%] relative animate-fade-in delay-200 mt-4 md:mt-0 w-full max-w-sm md:max-w-md mx-auto">
+                        <div class="relative aspect-[4/5] md:aspect-[3/4] group">
+                            <!-- Wrapper com overflow-hidden -->
+                            <div class="w-full h-full rounded-t-[50%] rounded-b-3xl overflow-hidden shadow-2xl border-4 border-white relative z-10 bg-brand-accent/20">
                                 <img src="assets/pao_caseiro.jpg" 
                                      alt="Pão artesanal macio dourado" 
-                                     class="w-full h-full object-cover animate-ken-burns">
-                                
-                                <!-- Efeito de Fumaça/Vapor CSS para dar água na boca -->
-                                <div class="steam-container">
-                                    <div class="steam"></div>
-                                    <div class="steam"></div>
-                                    <div class="steam"></div>
-                                </div>
+                                     class="w-full h-full object-cover animate-ken-burns foto-unificada">
                             </div>
 
-                            <!-- Badge posicionado FORA do overflow-hidden para não cortar -->
-                            <div class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 md:translate-x-0 md:-left-8 md:bottom-12 bg-brand-card rounded-full p-4 shadow-xl border-2 border-brand-accent flex items-center gap-3 z-30 transition-transform group-hover:scale-110">
-                                <div class="bg-brand-accentDark text-white w-12 h-12 rounded-full flex items-center justify-center text-xl flex-shrink-0">
+                            <!-- Badge Flutuante -->
+                            <div class="absolute -bottom-5 left-1/2 transform -translate-x-1/2 md:translate-x-0 md:-left-8 md:bottom-12 bg-brand-card rounded-full p-3 md:p-4 shadow-xl border-2 border-brand-accent flex items-center gap-2 md:gap-3 z-30 transition-transform group-hover:scale-105">
+                                <div class="bg-brand-accentDark text-white w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center text-lg md:text-xl flex-shrink-0">
                                     <i class="fas fa-heart"></i>
                                 </div>
-                                <div class="pr-3 whitespace-nowrap">
-                                    <p class="text-xs font-bold text-brand-text uppercase tracking-wide">Macio e</p>
-                                    <p class="font-script text-xl text-brand-accentDark leading-none">Quentinho</p>
+                                <div class="pr-2 md:pr-3 whitespace-nowrap">
+                                    <p class="text-[0.65rem] md:text-xs font-bold text-brand-text uppercase tracking-wide">Macio e</p>
+                                    <p class="font-script text-lg md:text-xl text-brand-accentDark leading-none">Quentinho</p>
                                 </div>
                             </div>
                         </div>
@@ -225,119 +194,107 @@
         </section>
 
         <!-- 3. Menu / Os 5 Carros Chefe -->
-        <section class="py-20 md:py-32 bg-white/50 backdrop-blur-sm border-y border-brand-accent/10" id="menu">
+        <section class="py-16 md:py-24 bg-white/60 backdrop-blur-md border-y border-brand-accent/10" id="menu">
             <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 
-                <div class="text-center mb-16 animate-fade-in">
-                    <span class="font-script text-3xl text-brand-accent mb-2 block">Destaques do menu</span>
-                    <h2 class="text-4xl md:text-5xl font-serif font-bold text-brand-text mb-6">Nossos Carros Chefe</h2>
-                    <div class="h-1 w-24 bg-brand-accent mx-auto rounded-full mb-6 opacity-60"></div>
-                    <p class="text-lg text-brand-text/70 max-w-2xl mx-auto">
+                <div class="text-center mb-12 md:mb-16 animate-fade-in">
+                    <span class="font-script text-2xl md:text-3xl text-brand-accent mb-2 block">Destaques do menu</span>
+                    <h2 class="text-3xl md:text-5xl font-serif font-bold text-brand-text mb-4">Nossos Carros Chefe</h2>
+                    <div class="h-1 w-16 md:w-24 bg-brand-accent mx-auto rounded-full mb-6 opacity-60"></div>
+                    <p class="text-base md:text-lg text-brand-text/70 max-w-2xl mx-auto px-4">
                         Os favoritos da nossa fornada. Perfeitos para qualquer momento do seu dia.
                     </p>
                 </div>
 
-                <!-- Flex container para centralizar as linhas (3 em cima, 2 em baixo) -->
-                <div class="flex flex-wrap justify-center gap-8 md:gap-10">
+                <div class="flex flex-wrap justify-center gap-6 md:gap-8 lg:gap-10">
                     
                     <!-- Card 1: Pão Caseiro -->
-                    <div class="w-full md:w-[calc(50%-1.25rem)] lg:w-[calc(33.333%-1.66rem)] bg-brand-card rounded-3xl overflow-hidden card-hover shadow-soft border border-brand-accent/10 flex flex-col animate-fade-in delay-100 group">
-                        <div class="h-64 img-zoom-container relative">
-                            <!-- Imagem do pão oficial -->
-                            <img src="assets/pao_caseiro.jpg" alt="Pão Caseiro Macio" class="w-full h-full object-cover">
-                            <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/70 to-transparent"></div>
-                            <h3 class="absolute bottom-4 left-6 text-2xl font-serif font-bold text-white drop-shadow-md">Pão Caseiro</h3>
+                    <div class="w-full md:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1.66rem)] bg-brand-card rounded-[2rem] overflow-hidden card-hover shadow-soft border border-brand-accent/10 flex flex-col animate-fade-in delay-100 group">
+                        <div class="h-56 md:h-64 img-zoom-container relative bg-brand-bg">
+                            <img src="assets/pao_caseiro.jpg" alt="Pão Caseiro Macio" class="w-full h-full object-cover foto-unificada">
+                            <div class="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/80 to-transparent"></div>
+                            <h3 class="absolute bottom-5 left-6 text-2xl font-serif font-bold text-white drop-shadow-md">Pão Caseiro</h3>
                         </div>
-                        <div class="p-6 md:p-8 flex-grow flex flex-col justify-between">
-                            <p class="text-brand-text/80 leading-relaxed mb-8 text-center sm:text-left relative z-10">
-                                <span class="text-brand-accent text-3xl absolute -top-4 -left-2 opacity-30">"</span>
+                        <div class="p-6 md:p-8 flex-grow flex flex-col justify-between items-center text-center">
+                            <!-- Descrição Limpa, sem aspas -->
+                            <p class="text-brand-text/80 text-[0.95rem] md:text-base leading-relaxed mb-6 font-medium">
                                 Dia sim, dia também, pão caseiro aqui tem. Macio, quentinho e perfeito para qualquer hora do dia.
-                                <span class="text-brand-accent text-3xl absolute -bottom-6 -right-2 opacity-30">"</span>
                             </p>
-                            <a href="https://wa.me/5519989389191" target="_blank" rel="noopener noreferrer" 
-                               class="w-full inline-flex items-center justify-center py-4 px-4 bg-brand-whatsapp text-white font-bold rounded-2xl shadow-lg hover:shadow-glow transition-all duration-300 transform group-hover:-translate-y-1">
+                            <!-- Botão na cor Caramelo/Dourado -->
+                            <a href="https://wa.me/5519989389191?text=Olá!%20Gostaria%20de%20pedir%20um%20Pão%20Caseiro." target="_blank" rel="noopener noreferrer" 
+                               class="w-full inline-flex items-center justify-center py-3.5 px-4 bg-brand-accent text-white font-bold rounded-2xl shadow-cardBtn hover:bg-brand-accentDark transition-all duration-300 transform group-hover:-translate-y-1">
                                 <i class="fab fa-whatsapp mr-2 text-xl"></i> Quero meu Pão
                             </a>
                         </div>
                     </div>
 
                     <!-- Card 2: Batata Recheada -->
-                    <div class="w-full md:w-[calc(50%-1.25rem)] lg:w-[calc(33.333%-1.66rem)] bg-brand-card rounded-3xl overflow-hidden card-hover shadow-soft border border-brand-accent/10 flex flex-col animate-fade-in delay-200 group">
-                        <div class="h-64 img-zoom-container relative">
-                            <img src="https://images.unsplash.com/photo-1515516969-d4008cc6241a?q=80&w=1000&auto=format&fit=crop" alt="Batata Recheada" class="w-full h-full object-cover">
-                            <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/70 to-transparent"></div>
-                            <h3 class="absolute bottom-4 left-6 text-2xl font-serif font-bold text-white drop-shadow-md">Batata Recheada</h3>
+                    <div class="w-full md:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1.66rem)] bg-brand-card rounded-[2rem] overflow-hidden card-hover shadow-soft border border-brand-accent/10 flex flex-col animate-fade-in delay-200 group">
+                        <div class="h-56 md:h-64 img-zoom-container relative bg-brand-bg">
+                            <img src="https://images.unsplash.com/photo-1515516969-d4008cc6241a?q=80&w=1000&auto=format&fit=crop" alt="Batata Recheada" class="w-full h-full object-cover foto-unificada">
+                            <div class="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/80 to-transparent"></div>
+                            <h3 class="absolute bottom-5 left-6 text-2xl font-serif font-bold text-white drop-shadow-md">Batata Recheada</h3>
                         </div>
-                        <div class="p-6 md:p-8 flex-grow flex flex-col justify-between">
-                            <p class="text-brand-text/80 leading-relaxed mb-8 text-center sm:text-left relative z-10">
-                                <span class="text-brand-accent text-3xl absolute -top-4 -left-2 opacity-30">"</span>
+                        <div class="p-6 md:p-8 flex-grow flex flex-col justify-between items-center text-center">
+                            <p class="text-brand-text/80 text-[0.95rem] md:text-base leading-relaxed mb-6 font-medium">
                                 A verdadeira batata recheada da Bendita Fornada. Nem no shopping tem igual! Encomende para experimentar.
-                                <span class="text-brand-accent text-3xl absolute -bottom-6 -right-2 opacity-30">"</span>
                             </p>
-                            <a href="https://wa.me/5519989389191" target="_blank" rel="noopener noreferrer" 
-                               class="w-full inline-flex items-center justify-center py-4 px-4 bg-brand-whatsapp text-white font-bold rounded-2xl shadow-lg hover:shadow-glow transition-all duration-300 transform group-hover:-translate-y-1">
-                                <i class="fab fa-whatsapp mr-2 text-xl"></i> Quero Batata Recheada
+                            <a href="https://wa.me/5519989389191?text=Olá!%20Gostaria%20de%20pedir%20uma%20Batata%20Recheada." target="_blank" rel="noopener noreferrer" 
+                               class="w-full inline-flex items-center justify-center py-3.5 px-4 bg-brand-accent text-white font-bold rounded-2xl shadow-cardBtn hover:bg-brand-accentDark transition-all duration-300 transform group-hover:-translate-y-1">
+                                <i class="fab fa-whatsapp mr-2 text-xl"></i> Quero a Batata
                             </a>
                         </div>
                     </div>
 
                     <!-- Card 3: Frango Assado -->
-                    <div class="w-full md:w-[calc(50%-1.25rem)] lg:w-[calc(33.333%-1.66rem)] bg-brand-card rounded-3xl overflow-hidden card-hover shadow-soft border border-brand-accent/10 flex flex-col animate-fade-in delay-300 group">
-                        <div class="h-64 img-zoom-container relative">
-                            <img src="https://images.unsplash.com/photo-1598514982205-f36b96d1e8d4?q=80&w=1000&auto=format&fit=crop" alt="Frango Assado" class="w-full h-full object-cover">
-                            <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/70 to-transparent"></div>
-                            <h3 class="absolute bottom-4 left-6 text-2xl font-serif font-bold text-white drop-shadow-md">Frango Assado</h3>
+                    <div class="w-full md:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1.66rem)] bg-brand-card rounded-[2rem] overflow-hidden card-hover shadow-soft border border-brand-accent/10 flex flex-col animate-fade-in delay-300 group">
+                        <div class="h-56 md:h-64 img-zoom-container relative bg-brand-bg">
+                            <img src="https://images.unsplash.com/photo-1598514982205-f36b96d1e8d4?q=80&w=1000&auto=format&fit=crop" alt="Frango Assado" class="w-full h-full object-cover foto-unificada">
+                            <div class="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/80 to-transparent"></div>
+                            <h3 class="absolute bottom-5 left-6 text-2xl font-serif font-bold text-white drop-shadow-md">Frango Assado</h3>
                         </div>
-                        <div class="p-6 md:p-8 flex-grow flex flex-col justify-between">
-                            <p class="text-brand-text/80 leading-relaxed mb-8 text-center sm:text-left relative z-10">
-                                <span class="text-brand-accent text-3xl absolute -top-4 -left-2 opacity-30">"</span>
+                        <div class="p-6 md:p-8 flex-grow flex flex-col justify-between items-center text-center">
+                            <p class="text-brand-text/80 text-[0.95rem] md:text-base leading-relaxed mb-6 font-medium">
                                 Frango assado com cebola, batata e tomate. Pensa numa mistura saborosa. Deu água na boca? Encomende um!
-                                <span class="text-brand-accent text-3xl absolute -bottom-6 -right-2 opacity-30">"</span>
                             </p>
-                            <a href="https://wa.me/5519989389191" target="_blank" rel="noopener noreferrer" 
-                               class="w-full inline-flex items-center justify-center py-4 px-4 bg-brand-whatsapp text-white font-bold rounded-2xl shadow-lg hover:shadow-glow transition-all duration-300 transform group-hover:-translate-y-1">
+                            <a href="https://wa.me/5519989389191?text=Olá!%20Gostaria%20de%20pedir%20um%20Frango%20Assado." target="_blank" rel="noopener noreferrer" 
+                               class="w-full inline-flex items-center justify-center py-3.5 px-4 bg-brand-accent text-white font-bold rounded-2xl shadow-cardBtn hover:bg-brand-accentDark transition-all duration-300 transform group-hover:-translate-y-1">
                                 <i class="fab fa-whatsapp mr-2 text-xl"></i> Quero Frango Assado
                             </a>
                         </div>
                     </div>
 
                     <!-- Card 4: Panqueca -->
-                    <div class="w-full md:w-[calc(50%-1.25rem)] lg:w-[calc(33.333%-1.66rem)] bg-brand-card rounded-3xl overflow-hidden card-hover shadow-soft border border-brand-accent/10 flex flex-col animate-fade-in delay-400 group">
-                        <div class="h-64 img-zoom-container relative">
-                            <!-- Foto da Panqueca Oficial -->
-                            <img src="assets/panqueca.png" alt="Panqueca Artesanal" class="w-full h-full object-cover">
-                            <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/70 to-transparent"></div>
-                            <h3 class="absolute bottom-4 left-6 text-2xl font-serif font-bold text-white drop-shadow-md">Panquecas</h3>
+                    <div class="w-full md:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1.66rem)] bg-brand-card rounded-[2rem] overflow-hidden card-hover shadow-soft border border-brand-accent/10 flex flex-col animate-fade-in delay-400 group">
+                        <div class="h-56 md:h-64 img-zoom-container relative bg-brand-bg">
+                            <img src="assets/panqueca.png" alt="Panqueca Artesanal" class="w-full h-full object-cover foto-unificada">
+                            <div class="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/80 to-transparent"></div>
+                            <h3 class="absolute bottom-5 left-6 text-2xl font-serif font-bold text-white drop-shadow-md">Panquecas</h3>
                         </div>
-                        <div class="p-6 md:p-8 flex-grow flex flex-col justify-between">
-                            <p class="text-brand-text/80 leading-relaxed mb-8 text-center sm:text-left relative z-10">
-                                <span class="text-brand-accent text-3xl absolute -top-4 -left-2 opacity-30">"</span>
+                        <div class="p-6 md:p-8 flex-grow flex flex-col justify-between items-center text-center">
+                            <p class="text-brand-text/80 text-[0.95rem] md:text-base leading-relaxed mb-6 font-medium">
                                 Panqueca salgada ou doce são sempre bem vindas, hummm! Experimente nossa massa levinha e muito recheio.
-                                <span class="text-brand-accent text-3xl absolute -bottom-6 -right-2 opacity-30">"</span>
                             </p>
-                            <a href="https://wa.me/5519989389191" target="_blank" rel="noopener noreferrer" 
-                               class="w-full inline-flex items-center justify-center py-4 px-4 bg-brand-whatsapp text-white font-bold rounded-2xl shadow-lg hover:shadow-glow transition-all duration-300 transform group-hover:-translate-y-1">
+                            <a href="https://wa.me/5519989389191?text=Olá!%20Gostaria%20de%20pedir%20Panquecas." target="_blank" rel="noopener noreferrer" 
+                               class="w-full inline-flex items-center justify-center py-3.5 px-4 bg-brand-accent text-white font-bold rounded-2xl shadow-cardBtn hover:bg-brand-accentDark transition-all duration-300 transform group-hover:-translate-y-1">
                                 <i class="fab fa-whatsapp mr-2 text-xl"></i> Quero Panquecas
                             </a>
                         </div>
                     </div>
 
                     <!-- Card 5: Bolo de Pote -->
-                    <div class="w-full md:w-[calc(50%-1.25rem)] lg:w-[calc(33.333%-1.66rem)] bg-brand-card rounded-3xl overflow-hidden card-hover shadow-soft border border-brand-accent/10 flex flex-col animate-fade-in delay-500 group">
-                        <div class="h-64 img-zoom-container relative">
-                            <!-- Exatamente a foto enviada pelo usuário -->
-                            <img src="assets/bolo_de_pote.jpg" alt="Bolo de Pote" class="w-full h-full object-cover">
-                            <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/70 to-transparent"></div>
-                            <h3 class="absolute bottom-4 left-6 text-2xl font-serif font-bold text-white drop-shadow-md">Bolo de Pote</h3>
+                    <div class="w-full md:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1.66rem)] bg-brand-card rounded-[2rem] overflow-hidden card-hover shadow-soft border border-brand-accent/10 flex flex-col animate-fade-in delay-500 group">
+                        <div class="h-56 md:h-64 img-zoom-container relative bg-brand-bg">
+                            <img src="assets/bolo_de_pote.jpg" alt="Bolo de Pote" class="w-full h-full object-cover foto-unificada">
+                            <div class="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/80 to-transparent"></div>
+                            <h3 class="absolute bottom-5 left-6 text-2xl font-serif font-bold text-white drop-shadow-md">Bolo de Pote</h3>
                         </div>
-                        <div class="p-6 md:p-8 flex-grow flex flex-col justify-between">
-                            <p class="text-brand-text/80 leading-relaxed mb-8 text-center sm:text-left relative z-10">
-                                <span class="text-brand-accent text-3xl absolute -top-4 -left-2 opacity-30">"</span>
+                        <div class="p-6 md:p-8 flex-grow flex flex-col justify-between items-center text-center">
+                            <p class="text-brand-text/80 text-[0.95rem] md:text-base leading-relaxed mb-6 font-medium">
                                 Para fechar com chave de ouro! Cremoso, molhadinho e feito com puro afeto. É impossível comer um só!
-                                <span class="text-brand-accent text-3xl absolute -bottom-6 -right-2 opacity-30">"</span>
                             </p>
-                            <a href="https://wa.me/5519989389191" target="_blank" rel="noopener noreferrer" 
-                               class="w-full inline-flex items-center justify-center py-4 px-4 bg-brand-whatsapp text-white font-bold rounded-2xl shadow-lg hover:shadow-glow transition-all duration-300 transform group-hover:-translate-y-1">
+                            <a href="https://wa.me/5519989389191?text=Olá!%20Gostaria%20de%20pedir%20um%20Bolo%20de%20Pote." target="_blank" rel="noopener noreferrer" 
+                               class="w-full inline-flex items-center justify-center py-3.5 px-4 bg-brand-accent text-white font-bold rounded-2xl shadow-cardBtn hover:bg-brand-accentDark transition-all duration-300 transform group-hover:-translate-y-1">
                                 <i class="fab fa-whatsapp mr-2 text-xl"></i> Quero Bolo de Pote
                             </a>
                         </div>
@@ -357,6 +314,7 @@
             </div>
             
             <div class="flex flex-col md:flex-row items-center gap-6 mb-12">
+                <!-- Botão Rodapé Verde (Ação Principal) -->
                 <a href="https://wa.me/5519989389191" target="_blank" rel="noopener noreferrer" 
                    class="w-full sm:w-auto bg-brand-whatsapp hover:bg-brand-whatsappHover text-white py-4 px-8 rounded-3xl md:rounded-full font-bold text-lg flex items-center justify-center gap-4 transition-all transform hover:scale-105 shadow-[0_4px_15px_rgba(37,211,102,0.3)]">
                     <i class="fab fa-whatsapp text-4xl"></i>
